@@ -75,6 +75,7 @@ export function Home() {
 
   const handleGranted = () => {
     setAnswer("granted");
+    setShowBackButton(true);
     
     // Confetti effect
     const duration = 3000;
@@ -121,6 +122,11 @@ export function Home() {
         });
       }, i * 100);
     });
+
+    // Auto-show reply button after reading the letter (8 seconds delay)
+    setTimeout(() => {
+      setShowReplyButton(true);
+    }, 8000);
   };
 
   const handleDenied = () => {
@@ -164,7 +170,7 @@ export function Home() {
   const handleSecondEnvelopeClick = () => {
     setSecondEnvelopeOpened(true);
     
-    // Confetti for second envelope
+    // Confetti for opening the reply
     const duration = 1500;
     const end = Date.now() + duration;
     const colors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ffd700"];
@@ -492,32 +498,18 @@ export function Home() {
                   transition={{ type: "spring", duration: 0.8 }}
                   className="text-center mt-8"
                 >
-                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-6">
-                    <motion.button
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleSecondEnvelopeClick}
-                      className="relative group inline-block"
-                    >
-                      <div className="bg-gradient-to-br from-purple-400 to-pink-400 w-48 h-28 rounded-lg shadow-2xl flex items-center justify-center transform transition-transform">
-                        <Mail size={60} className="text-white" />
-                      </div>
-                      <motion.div
-                        animate={{ y: [0, -5, 0] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute -top-3 -right-3 bg-yellow-300 rounded-full p-2 shadow-lg"
-                      >
-                        <Heart size={20} className="text-red-500" fill="currentColor" />
-                      </motion.div>
-                    </motion.button>
-                    <p className="mt-4 text-md font-semibold text-gray-700">
-                      There's something important I'd like to ask you...
-                    </p>
-                  </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleSecondEnvelopeClick}
+                    className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow"
+                  >
+                    Reply
+                  </motion.button>
                 </motion.div>
               )}
 
-              {/* Question revealed after second envelope is opened */}
+              {/* Question revealed after reply button is clicked */}
               {secondEnvelopeOpened && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -530,7 +522,7 @@ export function Home() {
                       Will you let me unlock the <span className="text-pink-600">"OFFICIAL PHASE"</span>
                     </p>
                     <p className="text-lg md:text-xl font-semibold text-gray-800">
-                      and officially call you mine?
+                      and can call you mine?
                     </p>
                   </div>
 

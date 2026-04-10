@@ -10,6 +10,7 @@ export function Home() {
   const [questionRevealed, setQuestionRevealed] = useState(false);
   const [answer, setAnswer] = useState<"granted" | "denied" | null>(null);
   const [showReplyButton, setShowReplyButton] = useState(false);
+  const [secondEnvelopeOpened, setSecondEnvelopeOpened] = useState(false);
   const [finalAnswer, setFinalAnswer] = useState<"yes" | "no" | null>(null);
   const [showBackButton, setShowBackButton] = useState(false);
   const navigate = useNavigate();
@@ -160,6 +161,36 @@ export function Home() {
     setShowReplyButton(true);
   };
 
+  const handleSecondEnvelopeClick = () => {
+    setSecondEnvelopeOpened(true);
+    
+    // Confetti for second envelope
+    const duration = 1500;
+    const end = Date.now() + duration;
+    const colors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ffd700"];
+
+    (function frame() {
+      confetti({
+        particleCount: 2,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0 },
+        colors: colors,
+      });
+      confetti({
+        particleCount: 2,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1 },
+        colors: colors,
+      });
+
+      if (Date.now() < end) {
+        requestAnimationFrame(frame);
+      }
+    })();
+  };
+
   const handleYes = () => {
     setFinalAnswer("yes");
     
@@ -212,6 +243,7 @@ export function Home() {
     setQuestionRevealed(false);
     setAnswer(null);
     setShowReplyButton(false);
+    setSecondEnvelopeOpened(false);
     setFinalAnswer(null);
     setShowBackButton(false);
   };
@@ -288,7 +320,7 @@ export function Home() {
                 </motion.div>
               </motion.button>
               <p className="mt-6 text-lg font-semibold text-gray-700">
-                Uncover the message and Reveal the Secret! with a click!
+                Uncover the message and Reveal the Secret with a click!
               </p>
             </motion.div>
           )}
@@ -453,18 +485,18 @@ export function Home() {
               </div>
 
               {/* Second envelope appears after delay */}
-              {showReplyButton && (
+              {showReplyButton && !secondEnvelopeOpened && (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.5 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ type: "spring", duration: 0.8 }}
                   className="text-center mt-8"
                 >
-                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-6 mb-4">
+                  <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-6">
                     <motion.button
                       whileHover={{ scale: 1.1, rotate: 5 }}
                       whileTap={{ scale: 0.95 }}
-                      onClick={() => {}}
+                      onClick={handleSecondEnvelopeClick}
                       className="relative group inline-block"
                     >
                       <div className="bg-gradient-to-br from-purple-400 to-pink-400 w-48 h-28 rounded-lg shadow-2xl flex items-center justify-center transform transition-transform">
@@ -482,42 +514,45 @@ export function Home() {
                       There's something important I'd like to ask you...
                     </p>
                   </div>
+                </motion.div>
+              )}
 
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="space-y-4"
+              {/* Question revealed after second envelope is opened */}
+              {secondEnvelopeOpened && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ type: "spring", duration: 0.6 }}
+                  className="space-y-4 mt-8"
+                >
+                  <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl text-center border-2 border-pink-200">
+                    <p className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
+                      Will you let me unlock the <span className="text-pink-600">"OFFICIAL PHASE"</span>
+                    </p>
+                    <p className="text-lg md:text-xl font-semibold text-gray-800">
+                      and officially call you mine?
+                    </p>
+                  </div>
+
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleYes}
+                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
                   >
-                    <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl text-center border-2 border-pink-200">
-                      <p className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
-                        Will you let me unlock the <span className="text-pink-600">"OFFICIAL PHASE"</span>
-                      </p>
-                      <p className="text-lg md:text-xl font-semibold text-gray-800">
-                        and officially call you mine?
-                      </p>
-                    </div>
+                    <span>☐ YES</span>
+                    <span className="text-2xl">💚</span>
+                  </motion.button>
 
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleYes}
-                      className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
-                    >
-                      <span>☐ YES</span>
-                      <span className="text-2xl">💚</span>
-                    </motion.button>
-
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={handleNo}
-                      className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
-                    >
-                      <span>☐ NO</span>
-                      <span className="text-2xl">💔</span>
-                    </motion.button>
-                  </motion.div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleNo}
+                    className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
+                  >
+                    <span>☐ NO</span>
+                    <span className="text-2xl">💔</span>
+                  </motion.button>
                 </motion.div>
               )}
 

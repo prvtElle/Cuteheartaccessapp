@@ -363,7 +363,7 @@ export function Home() {
                 </motion.div>
               </motion.button>
               <p className="mt-6 text-lg font-semibold text-gray-700">
-                Uncover the message and Reveal the Secret with a click!
+                Reveal the Secret with a click!
               </p>
             </motion.div>
           )}

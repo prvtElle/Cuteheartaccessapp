@@ -442,47 +442,70 @@ export function Home() {
               </div>
 
               <div className="px-4 md:px-8 mb-6 space-y-4 text-gray-700 leading-relaxed">
-                <p className="font-semibold text-lg text-pink-700">Hello Bubby/Biiiii,</p>
-                
+                <p className="font-semibold text-lg text-pink-700">Hello Bubby,</p>
+
                 <p className="text-base">
                   The amount of thoughts that have been going through my mind lately includes a lot of things, but one thought that has been constantly occupying the space in my heart is my gratitude towards you. It is something that I may not tell you often, but you mean a lot to me and your presence in my life means a lot. There is so much about you that I love, from the simple things to the big things. You've made my life so warm and joyful that I feel very blessed that I've met you not by choice, instead by chance. You have given me so many reasons to keep going forward that I feel lucky just to have you around. All you have done for me reminds me a lot and surely to be cherished.
                 </p>
 
                 <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
                   <p className="italic text-pink-700 text-sm md:text-base">
+                    "God knows the right time, the right place, the right person, and the right answer to your prayers."
+                  </p>
+                </div>
+
+                <p className="text-base">
+                  And there are times when you ask yourself why nothing is happening yet, why your prayer of love, your prayer of opportunities, your prayer of breakthroughs has been postponed. However, as time passes by, you come to see that everything that was withheld was actually withheld for a reason. (Ecclesiastes 3:11)
+                </p>
+
+                <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
+                  <p className="italic text-purple-700 text-sm md:text-base">
                     "Love bears all things, believes all things, hopes all things, endures all things." <br/>
                     <span className="text-xs">(1 Corinthians 13:6–7 ESV)</span>
                   </p>
                 </div>
 
                 <p className="text-base">
-                  Simply means that love will always be resilient and never stop working even when conditions get tough, love will not question itself; instead, it is all about remaining faithful, hopeful, and committed.
-                </p>
-
-                <p className="text-base">
-                  A love that is patient, compassionate, and able to hold on even when the going gets tough that's how important it is to me. And yes, I do feel like having you in my life is a blessing, since sharing my life with you has made it that much easier to live and enjoy. It is much easier for people to live their lives when they have someone else supporting them. This means that two individuals together will do things faster, motivate each other, and deal with difficulties that might seem insurmountable on their own.
-                </p>
-
-                <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
-                  <p className="italic text-purple-700 text-sm md:text-base">
-                    "Two are better than one, because they have a good reward for their toil." <br/>
-                    <span className="text-xs">(Ecclesiastes 4:9)</span>
-                  </p>
-                </div>
-
-                <p className="text-base">
-                  Being with you allows me to be myself without worrying about whether I'm good enough. It is rare that you provide me with the kind of serenity that allows me to be who I am. Love from God or love that mirrors God does away with fear. This fear is usually due to insecurity or a lack of confidence. In the absence of any fear, one can have a lot of self-confidence and courage.
+                  Simply means that love isn't just sunshine and rainbows; it also entails the willingness to stick around when things start to go away. It endures all things, not only does it accept struggles and difficulties, but it accepts its partner's weaknesses and flaws, as well. It believes all things, not only does it believe in itself and its own strength, but it also believes in its partner, even when he or she fails to live up to expectations. It hopes all things not only does it hope for its own future happiness, but it hopes for its partner's future happiness, too. And it endures all things it doesn't give up at the first sign of trouble, but it persists through every storm, every trial, and every hardship.
                 </p>
 
                 <div className="border-l-4 border-blue-400 pl-4 py-2 bg-blue-50 rounded-r-lg">
                   <p className="italic text-blue-700 text-sm md:text-base">
-                    "Such love has no fear, because perfect love expels all fear" <br/>
-                    <span className="text-xs">(1 John 4:18 NLT)</span>
+                    "As long as we wait for the perfect time, everything will be worth it. The waiting season is hard though, but trusting God and His timing are way better."
                   </p>
                 </div>
 
                 <p className="text-base">
-                  Thank you for your patience, compassion, understanding, and decision to show up in my life. Thank you for making me feel safe, for putting a smile on my face, and for simply brightening my life just by being around. I can't thank you enough for the blessing you've been in my life. I'm extremely thankful that it is YOU 💛
+                  At this point, you might be feeling frustrated because there does not seem to be any change; but change is taking place slowly. The seed does not bloom immediately after being planted in the soil. The same happens for you too. (Galatians 6:9)
+                </p>
+
+                <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
+                  <p className="italic text-pink-700 text-sm md:text-base">
+                    "True love, just like faith, often involves waiting and trusting God's timing."
+                  </p>
+                </div>
+
+                <p className="text-base">
+                  In an era where everything moves quickly from messages to responses to relationships, it may be difficult to understand the frustration that comes with love taking its time. "Why does it always take time? If it is meant to be, then why do I have to wait?" This is what you may think about when you have been longing for something that is supposed to come easy. However, the best kind of love always takes some time because it is built during the process of preparation, learning, growing, and healing so that when you meet the person that you will be spending your life with, you will be ready. As such, patience is key, just like with the case of faith, since everything in God's plan has a purpose. Sometimes, the reason for waiting might just be that God is protecting you from yourself or the other party. (Romans 8:25)
+                </p>
+
+                <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
+                  <p className="italic text-purple-700 text-sm md:text-base">
+                    "May the Lord keep watch between you and me, when we are away from each other." <br/>
+                    <span className="text-xs">(Genesis 31:49)</span>
+                  </p>
+                </div>
+
+                <p className="text-base">
+                  Distance is tough, not being able to see the person we love everyday, maintaining a relationship when apart from one another, or just being in a phase where we don't get to see each other much anymore. There would be instances when we want to be there for the other person because we want to provide protection and comfort. However, what this verse does is gently let us know that although we are unable to do so, God can do that for us and for our significant other. It tells us that the Lord sees both of us, takes care of both of our hearts, and closes the physical gap brought upon by distance. It's almost as if saying, "I may not be here at all times, but you're never without a protector and guide because He is with you wherever I can no longer be."
+                </p>
+
+                <p className="text-base">
+                  As stated in 1 Peter 4:8 "Love without conditions", real love doesn't mean "If… I'll love you." instead it is selecting someone in spite of all these difficulties: despite it being a hassle; despite their imperfections; and despite the situation being hard. It involves tolerating and understanding the other person, no matter how difficult that may be. It shows up every day, despite being hurt, misunderstood, disappointed, and exhausted. Because it isn't fragile, fickle, or fleeting. It stands the test of time and trials. And yes, I do feel like having you in my life is a blessing, since sharing my life with you has made it that much easier to live and enjoy. It is much easier for people to live their lives when they have someone else supporting them. This means that two individuals together will do things faster, motivate each other, and deal with difficulties that might seem insurmountable on their own.
+                </p>
+
+                <p className="text-base">
+                  Those times when we were alone, when we laughed out loud, and even sleeping on our cellphones … It all wasn't just for fun. It meant a lot to me, especially those instances where we revealed parts of ourselves to one another. They had a certain authenticity about them that I will never forget. And those phone calls, you made them so memorable for me. I could talk with you for hours, yet they seemed like only a minute went by because it was such an enjoyable experience. Being with you, even through a screen, was always something I looked forward to. Each time you come to my mind, I catch myself silently thanking God for you. You are one individual who can inject warmth, peace, and joy into the lives of people – yet, you have managed to do that in mine. You are more than precious to me as you are a valuable gem. All your little quirks, the feelings you instill within me, and our wonderful memories will always be with me. It is not enough for me to just remember you. It is about being thankful to you. Each and every time. Thank you for your patience, compassion, understanding, and decision to show up in my life. Thank you for making me feel safe, for putting a smile on my face, and for simply brightening my life just by being around. I can't thank you enough for the blessing you've been in my life. I'm extremely thankful that it is YOU 💛
                 </p>
 
                 <p className="text-center font-semibold text-lg text-pink-600 mt-6 pt-4 border-t-2 border-pink-200">

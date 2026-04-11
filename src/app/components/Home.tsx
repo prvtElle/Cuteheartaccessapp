@@ -31,26 +31,34 @@ export function Home() {
 
   const handleEnvelopeClick = () => {
     setEnvelopeOpened(true);
-    
-    // Confetti and balloons when opening envelope
+
+    // Balloons when opening envelope
     const duration = 2000;
     const end = Date.now() + duration;
     const colors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ffd700"];
 
     (function frame() {
       confetti({
-        particleCount: 2,
+        particleCount: 3,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2,
+        gravity: 0.5,
+        drift: 0.2,
       });
       confetti({
-        particleCount: 2,
+        particleCount: 3,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2,
+        gravity: 0.5,
+        drift: -0.2,
       });
 
       if (Date.now() < end) {
@@ -58,13 +66,16 @@ export function Home() {
       }
     })();
 
-    // Balloons
+    // Balloon burst
     setTimeout(() => {
       confetti({
-        particleCount: 30,
+        particleCount: 40,
         spread: 100,
         origin: { y: 0.6 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2.5,
+        gravity: 0.6,
       });
     }, 200);
 
@@ -76,8 +87,8 @@ export function Home() {
   const handleGranted = () => {
     setAnswer("granted");
     setShowBackButton(true);
-    
-    // Confetti effect
+
+    // Balloons effect
     const duration = 3000;
     const end = Date.now() + duration;
 
@@ -85,18 +96,26 @@ export function Home() {
 
     (function frame() {
       confetti({
-        particleCount: 3,
+        particleCount: 4,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2.2,
+        gravity: 0.5,
+        drift: 0.3,
       });
       confetti({
-        particleCount: 3,
+        particleCount: 4,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2.2,
+        gravity: 0.5,
+        drift: -0.3,
       });
 
       if (Date.now() < end) {
@@ -104,12 +123,12 @@ export function Home() {
       }
     })();
 
-    // Balloons effect
+    // Floating balloons effect
     const balloonColors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ff6ec7"];
     balloonColors.forEach((color, i) => {
       setTimeout(() => {
         confetti({
-          particleCount: 1,
+          particleCount: 2,
           startVelocity: 30,
           spread: 360,
           origin: {
@@ -118,7 +137,8 @@ export function Home() {
           },
           colors: [color],
           shapes: ["circle"],
-          scalar: 3,
+          scalar: 3.5,
+          gravity: 0.4,
         });
       }, i * 100);
     });
@@ -169,26 +189,34 @@ export function Home() {
 
   const handleSecondEnvelopeClick = () => {
     setSecondEnvelopeOpened(true);
-    
-    // Confetti for opening the reply
+
+    // Balloons for opening the reply
     const duration = 1500;
     const end = Date.now() + duration;
     const colors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ffd700"];
 
     (function frame() {
       confetti({
-        particleCount: 2,
+        particleCount: 3,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2,
+        gravity: 0.5,
+        drift: 0.2,
       });
       confetti({
-        particleCount: 2,
+        particleCount: 3,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2,
+        gravity: 0.5,
+        drift: -0.2,
       });
 
       if (Date.now() < end) {
@@ -199,8 +227,8 @@ export function Home() {
 
   const handleYes = () => {
     setFinalAnswer("yes");
-    
-    // More intense confetti for YES
+
+    // More intense balloons for YES
     const duration = 5000;
     const end = Date.now() + duration;
 
@@ -208,18 +236,26 @@ export function Home() {
 
     (function frame() {
       confetti({
-        particleCount: 5,
+        particleCount: 6,
         angle: 60,
         spread: 55,
         origin: { x: 0 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2.5,
+        gravity: 0.5,
+        drift: 0.3,
       });
       confetti({
-        particleCount: 5,
+        particleCount: 6,
         angle: 120,
         spread: 55,
         origin: { x: 1 },
         colors: colors,
+        shapes: ["circle"],
+        scalar: 2.5,
+        gravity: 0.5,
+        drift: -0.3,
       });
 
       if (Date.now() < end) {
@@ -227,15 +263,16 @@ export function Home() {
       }
     })();
 
-    // Heart explosion
+    // Balloon explosion
     setTimeout(() => {
       confetti({
         particleCount: 100,
         spread: 360,
         origin: { y: 0.5 },
         colors: colors,
-        shapes: ["circle", "square"],
-        scalar: 1.2,
+        shapes: ["circle"],
+        scalar: 2.8,
+        gravity: 0.6,
       });
     }, 300);
   };
@@ -409,18 +446,68 @@ export function Home() {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", duration: 0.6 }}
-              className="bg-white rounded-3xl shadow-2xl p-6 md:p-10 max-w-3xl w-full mx-4 relative"
+              className="rounded-3xl shadow-2xl p-6 md:p-10 max-w-3xl w-full mx-4 relative overflow-hidden"
               style={{
-                backgroundImage: "linear-gradient(to bottom, #fff5f7 0%, #ffffff 100%)",
+                backgroundImage: `
+                  radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(221, 160, 221, 0.3) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 20%, rgba(255, 240, 245, 0.4) 0%, transparent 50%),
+                  repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 35px,
+                    rgba(255, 192, 203, 0.15) 35px,
+                    rgba(255, 192, 203, 0.15) 36px
+                  ),
+                  linear-gradient(135deg,
+                    #ffd6e8 0%,
+                    #ffe4f1 15%,
+                    #fff0f8 30%,
+                    #ffeef7 45%,
+                    #ffe8f5 60%,
+                    #ffd9ed 75%,
+                    #ffcce5 90%,
+                    #ffd6e8 100%
+                  )
+                `,
               }}
             >
               {/* Letter Design */}
-              <div className="absolute top-0 left-0 w-full h-8 bg-gradient-to-r from-pink-200 via-purple-200 to-pink-200 rounded-t-3xl"></div>
-              <div className="absolute top-8 left-0 w-full h-1 bg-pink-300"></div>
-              
-              {/* Decorative corners */}
+              <div className="absolute top-0 left-0 w-full h-8 bg-gradient-to-r from-pink-300 via-purple-300 to-pink-300 rounded-t-3xl shadow-md"></div>
+              <div className="absolute top-8 left-0 w-full h-1 bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400"></div>
+
+              {/* Decorative corners and borders */}
               <div className="absolute top-4 left-4 text-pink-300 text-2xl">🌸</div>
               <div className="absolute top-4 right-4 text-pink-300 text-2xl">🌸</div>
+
+              {/* Corner decorations */}
+              <div className="absolute top-12 left-2 text-pink-200 text-xl">✨</div>
+              <div className="absolute top-12 right-2 text-pink-200 text-xl">✨</div>
+              <div className="absolute top-20 left-4 text-purple-200 text-sm">💝</div>
+              <div className="absolute top-20 right-4 text-purple-200 text-sm">💝</div>
+
+              {/* Floating hearts decoration */}
+              <motion.div
+                animate={{ y: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="absolute top-32 left-8 text-pink-200 text-2xl"
+              >
+                💕
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, -15, 0], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                className="absolute top-48 right-6 text-purple-200 text-2xl"
+              >
+                💗
+              </motion.div>
+              <motion.div
+                animate={{ y: [0, -12, 0], opacity: [0.3, 0.6, 0.3] }}
+                transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+                className="absolute top-64 left-6 text-pink-200 text-xl"
+              >
+                💖
+              </motion.div>
               
               <div className="pt-8 text-center mb-6">
                 <motion.div
@@ -574,6 +661,26 @@ export function Home() {
               {/* Decorative bottom corners */}
               <div className="absolute bottom-4 left-4 text-pink-300 text-2xl">💕</div>
               <div className="absolute bottom-4 right-4 text-pink-300 text-2xl">💕</div>
+              <div className="absolute bottom-12 left-2 text-pink-200 text-xl">🎀</div>
+              <div className="absolute bottom-12 right-2 text-pink-200 text-xl">🎀</div>
+              <div className="absolute bottom-20 left-6 text-purple-200 text-sm">🌺</div>
+              <div className="absolute bottom-20 right-6 text-purple-200 text-sm">🌺</div>
+
+              {/* Decorative side elements */}
+              <motion.div
+                animate={{ rotate: [0, 10, 0], opacity: [0.4, 0.7, 0.4] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="absolute bottom-40 left-2 text-pink-200 text-lg"
+              >
+                🦋
+              </motion.div>
+              <motion.div
+                animate={{ rotate: [0, -10, 0], opacity: [0.4, 0.7, 0.4] }}
+                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                className="absolute bottom-56 right-2 text-purple-200 text-lg"
+              >
+                🦋
+              </motion.div>
             </motion.div>
           )}
 

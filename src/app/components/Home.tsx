@@ -532,7 +532,7 @@ export function Home() {
                 <p className="font-semibold text-lg text-pink-700">Hello Bubby,</p>
 
                 <p className="text-base text-justify indent-8">
-                  All this began with a simple "Hi" without any particular reason. Our interactions started with simple talk, and gradually, it grew beyond what we had expected. These simple talks began to develop into deep and serious conversations, which are tough to define at times. In essence, one simple talk led to a chance connection, which later formed the basis of a strong connection between two individuals who found solace in each other. Over time, our talks grew from simple ones to more meaningful discussions. We developed a relationship where one could vent problems while the other would listen patiently and offers comfort. While this may sound quite cringe, this made us realize that it was not just random chats, there was something developing in between which needs to nurture and cherish, some difficulties and differences along the way due to different personalities. Rather than becoming a conflict althroughout the connection, these differences helped us build a stronger bridge that connected us in ways that neither of us anticipated when that simple "Hi" happened. Those simply acts like serving as alarm clocks to each other whenever we had to change our sleeping schedules due to varying time zones. Either of us stayed awake to ensure the other got out of bed on time. Although it seems like a little gesture, it is an example of the extent to which we were both adjusted for each other. Constantly assuring each other that everything was okay was necessary to sustain the connection in spite of the challenges we faced due to distance. It is natural to be doubtful and to think too much about things specially with such a situation as long distance thing yet it is clear that such problems can only be overcome through adjustment and patience once both individual work on it together. It is amazing that we are able to remain in contact despite the fact that there are misunderstandings that might occur. Sometimes it takes time before we actually have a talk and sort everything out, but we always make it happen once we are in a good state of mind to do so. Conflicts help us understand how important communication to express ourselves properly and voicing out things that upsets us rather than keeping them inside. In the end, nothing is being lost when we choose to set aside our pride for the person we truly cherish instead, it strengthens the connection, teaching us patience, understanding, and the value of meeting each other halfway. Going above and beyond in things that are outside of my control is not a matter of duty or favor. This is something that I am choosing to do for you because you deserve it. You deserve the right to feel like an individual who should never have to compete against another person and even compare yourself to anyone else. You deserve to be heard in times where no one else will listen to you. You deserve to be seen. You are valid and always worthy of everything. In this world full of "It is what it is", do always remember that "You are worth to risk".
+                  The whole thing got started with such a "Hi" not prompted by anything significant. What were supposed to be casual talks turned out to be more important than either of us could expect at first. The innocent chitchatting gradually transformed into profound discussions and exchanges which brought us comfort, harmony, and understanding. With time going on, we grew closer, developing an intimate bond where one would pour his/her problems out and listen to the comforting words. I might admit it looks somewhat corny but it really made us understand that what we were experiencing was more than just casual discussions. There was some true connection that should have been appreciated. It is clear that our relationship was complicated with all sorts of misunderstanding due to the difference in personalities and even distance between us. However, rather than breaking the bond, this experience helped to develop our patience, adjustment ability, and tolerance towards each other. We learned that communication plays an extremely significant role when we are having a hard time. There will be times when misunderstandings will take some time to get resolved, yet we always discuss everything after calming down.In the end, putting pride aside for the person that you really love will not harm the bond at all but make it stronger because it shows both individuals how to compromise amidst all difficulties. Going beyond what is expected for you is never something I do out of obligation. I choose to do it because you deserve it. You deserve to feel valued without comparing yourself to anyone else. You deserve to be heard, understood, and appreciated for who you are. In a world full of "It is what it is," always remember this: you are someone worth choosing and worth the risk.
                 </p>
 
                 <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
@@ -547,37 +547,6 @@ export function Home() {
 
                 <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
                   <p className="italic text-purple-700 text-sm md:text-base">
-                    "Love bears all things, believes all things, hopes all things, endures all things." <br/>
-                    <span className="text-xs">(1 Corinthians 13:6–7 ESV)</span>
-                  </p>
-                </div>
-
-                <p className="text-base text-justify indent-8">
-                  Simply means that love isn't just sunshine and rainbows; it also entails the willingness to stick around when things start to go away. It endures all things, not only does it accept struggles and difficulties, but it accepts its partner's weaknesses and flaws, as well. It believes all things, not only does it believe in itself and its own strength, but it also believes in its partner, even when he or she fails to live up to expectations. It hopes all things not only does it hope for its own future happiness, but it hopes for its partner's future happiness, too. And it endures all things it doesn't give up at the first sign of trouble, but it persists through every storm, every trial, and every hardship.
-                </p>
-
-                <div className="border-l-4 border-blue-400 pl-4 py-2 bg-blue-50 rounded-r-lg">
-                  <p className="italic text-blue-700 text-sm md:text-base">
-                    "As long as we wait for the perfect time, everything will be worth it. The waiting season is hard though, but trusting God and His timing are way better."
-                  </p>
-                </div>
-
-                <p className="text-base text-justify indent-8">
-                  At this point, you might be feeling frustrated because there does not seem to be any change; but change is taking place slowly. The seed does not bloom immediately after being planted in the soil. The same happens for you too. (Galatians 6:9)
-                </p>
-
-                <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
-                  <p className="italic text-pink-700 text-sm md:text-base">
-                    "True love, just like faith, often involves waiting and trusting God's timing."
-                  </p>
-                </div>
-
-                <p className="text-base text-justify indent-8">
-                  In an era where everything moves quickly from messages to responses to relationships, it may be difficult to understand the frustration that comes with love taking its time. "Why does it always take time? If it is meant to be, then why do I have to wait?" This is what you may think about when you have been longing for something that is supposed to come easy. However, the best kind of love always takes some time because it is built during the process of preparation, learning, growing, and healing so that when you meet the person that you will be spending your life with, you will be ready. As such, patience is key, just like with the case of faith, since everything in God's plan has a purpose. Sometimes, the reason for waiting might just be that God is protecting you from yourself or the other party. (Romans 8:25)
-                </p>
-
-                <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
-                  <p className="italic text-purple-700 text-sm md:text-base">
                     "May the Lord keep watch between you and me, when we are away from each other." <br/>
                     <span className="text-xs">(Genesis 31:49)</span>
                   </p>
@@ -588,7 +557,7 @@ export function Home() {
                 </p>
 
                 <p className="text-base text-justify indent-8">
-                  As stated in 1 Peter 4:8 "Love without conditions", real love doesn't mean "If… I'll love you." instead it is selecting someone in spite of all these difficulties: despite it being a hassle; despite their imperfections; and despite the situation being hard. It involves tolerating and understanding the other person, no matter how difficult that may be. It shows up every day, despite being hurt, misunderstood, disappointed, and exhausted. Because it isn't fragile, fickle, or fleeting. It stands the test of time and trials. And yes, I do feel like having you in my life is a blessing, since sharing my life with you has made it that much easier to live and enjoy. It is much easier for people to live their lives when they have someone else supporting them. This means that two individuals together will do things faster, motivate each other, and deal with difficulties that might seem insurmountable on their own.
+                  Just as written in 1 Peter 4:8, "Love each other deeply," true love should never be conditioned. True love never says, "If this occurs, I will love you." Rather, it is about picking someone regardless of the obstacles, problems, and complications. Being patient and accepting are some of the elements of true love. Keeps on showing up every single day irrespective of pain, misunderstandings, disappointments, or exhaustion.
                 </p>
 
                 <p className="text-base text-justify indent-8">
@@ -628,11 +597,8 @@ export function Home() {
                   className="space-y-4 mt-8"
                 >
                   <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl text-center border-2 border-pink-200">
-                    <p className="text-lg md:text-xl font-semibold text-gray-800 mb-2">
-                      Will you let me unlock the <span className="text-pink-600">"OFFICIAL PHASE"</span>
-                    </p>
                     <p className="text-lg md:text-xl font-semibold text-gray-800">
-                      and can call you mine?
+                      Would you mind unlocking the <span className="text-pink-600">"OFFICIAL PHASE?"</span>
                     </p>
                   </div>
 

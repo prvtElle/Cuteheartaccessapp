@@ -9,10 +9,8 @@ export function Home() {
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
   const [questionRevealed, setQuestionRevealed] = useState(false);
   const [answer, setAnswer] = useState<"granted" | "denied" | null>(null);
-  const [showReplyButton, setShowReplyButton] = useState(false);
-  const [secondEnvelopeOpened, setSecondEnvelopeOpened] = useState(false);
-  const [finalAnswer, setFinalAnswer] = useState<"yes" | "no" | null>(null);
   const [showBackButton, setShowBackButton] = useState(false);
+  const [showTulips, setShowTulips] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -85,8 +83,12 @@ export function Home() {
   };
 
   const handleGranted = () => {
-    setAnswer("granted");
-    setShowBackButton(true);
+    setShowTulips(true);
+    setTimeout(() => {
+      setShowTulips(false);
+      setAnswer("granted");
+      setShowBackButton(true);
+    }, 3000);
 
     // Balloons effect
     const duration = 3000;
@@ -143,10 +145,6 @@ export function Home() {
       }, i * 100);
     });
 
-    // Auto-show reply button after reading the letter (8 seconds delay)
-    setTimeout(() => {
-      setShowReplyButton(true);
-    }, 8000);
   };
 
   const handleDenied = () => {
@@ -183,111 +181,11 @@ export function Home() {
     }
   };
 
-  const handleShowReply = () => {
-    setShowReplyButton(true);
-  };
-
-  const handleSecondEnvelopeClick = () => {
-    setSecondEnvelopeOpened(true);
-
-    // Balloons for opening the reply
-    const duration = 1500;
-    const end = Date.now() + duration;
-    const colors = ["#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1", "#ffd700"];
-
-    (function frame() {
-      confetti({
-        particleCount: 3,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: colors,
-        shapes: ["circle"],
-        scalar: 2,
-        gravity: 0.5,
-        drift: 0.2,
-      });
-      confetti({
-        particleCount: 3,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: colors,
-        shapes: ["circle"],
-        scalar: 2,
-        gravity: 0.5,
-        drift: -0.2,
-      });
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
-  };
-
-  const handleYes = () => {
-    setFinalAnswer("yes");
-
-    // More intense balloons for YES
-    const duration = 5000;
-    const end = Date.now() + duration;
-
-    const colors = ["#ffd700", "#ff69b4", "#ff1493", "#ff85c1", "#ffb6c1"];
-
-    (function frame() {
-      confetti({
-        particleCount: 6,
-        angle: 60,
-        spread: 55,
-        origin: { x: 0 },
-        colors: colors,
-        shapes: ["circle"],
-        scalar: 2.5,
-        gravity: 0.5,
-        drift: 0.3,
-      });
-      confetti({
-        particleCount: 6,
-        angle: 120,
-        spread: 55,
-        origin: { x: 1 },
-        colors: colors,
-        shapes: ["circle"],
-        scalar: 2.5,
-        gravity: 0.5,
-        drift: -0.3,
-      });
-
-      if (Date.now() < end) {
-        requestAnimationFrame(frame);
-      }
-    })();
-
-    // Balloon explosion
-    setTimeout(() => {
-      confetti({
-        particleCount: 100,
-        spread: 360,
-        origin: { y: 0.5 },
-        colors: colors,
-        shapes: ["circle"],
-        scalar: 2.8,
-        gravity: 0.6,
-      });
-    }, 300);
-  };
-
-  const handleNo = () => {
-    setFinalAnswer("no");
-  };
 
   const handleBack = () => {
     setEnvelopeOpened(false);
     setQuestionRevealed(false);
     setAnswer(null);
-    setShowReplyButton(false);
-    setSecondEnvelopeOpened(false);
-    setFinalAnswer(null);
     setShowBackButton(false);
   };
 
@@ -409,11 +307,8 @@ export function Home() {
                   <Heart size={80} className="text-red-500" fill="currentColor" />
                 </motion.div>
                 <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                  Access Request
+                  Would you mind unlocking the <span className="text-pink-600">"OFFICIAL PHASE?"</span>
                 </h2>
-                <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                  Can I have a Special Access to your <span className="text-red-500 font-bold">HEART?</span>
-                </p>
               </div>
 
               <div className="space-y-4">
@@ -423,8 +318,8 @@ export function Home() {
                   onClick={handleGranted}
                   className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
                 >
-                  <span>☐ REQUEST GRANTED</span>
-                  <span className="text-2xl">💖</span>
+                  <span>☐ YES</span>
+                  <span className="text-2xl">💚</span>
                 </motion.button>
 
                 <motion.button
@@ -433,14 +328,14 @@ export function Home() {
                   onClick={handleDenied}
                   className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
                 >
-                  <span>☐ REQUEST DENIED</span>
-                  <span className="text-2xl">🥺</span>
+                  <span>☐ NO</span>
+                  <span className="text-2xl">💔</span>
                 </motion.button>
               </div>
             </motion.div>
           )}
 
-          {answer === "granted" && !finalAnswer && (
+          {answer === "granted" && (
             <motion.div
               key="granted"
               initial={{ scale: 0, opacity: 0 }}
@@ -532,7 +427,11 @@ export function Home() {
                 <p className="font-semibold text-lg text-pink-700">Hello Bubby,</p>
 
                 <p className="text-base text-justify indent-8">
-                  The whole thing got started with such a "Hi" not prompted by anything significant. What were supposed to be casual talks turned out to be more important than either of us could expect at first. The innocent chitchatting gradually transformed into profound discussions and exchanges which brought us comfort, harmony, and understanding. With time going on, we grew closer, developing an intimate bond where one would pour his/her problems out and listen to the comforting words. I might admit it looks somewhat corny but it really made us understand that what we were experiencing was more than just casual discussions. There was some true connection that should have been appreciated. It is clear that our relationship was complicated with all sorts of misunderstanding due to the difference in personalities and even distance between us. However, rather than breaking the bond, this experience helped to develop our patience, adjustment ability, and tolerance towards each other. We learned that communication plays an extremely significant role when we are having a hard time. There will be times when misunderstandings will take some time to get resolved, yet we always discuss everything after calming down.In the end, putting pride aside for the person that you really love will not harm the bond at all but make it stronger because it shows both individuals how to compromise amidst all difficulties. Going beyond what is expected for you is never something I do out of obligation. I choose to do it because you deserve it. You deserve to feel valued without comparing yourself to anyone else. You deserve to be heard, understood, and appreciated for who you are. In a world full of "It is what it is," always remember this: you are someone worth choosing and worth the risk.
+                  It all began with just a simple "Hi". Casual conversations turned into discussions that brought more and more comfort to both of us until eventually they became something that neither of us anticipated. Through simple conversations, we discovered mutual understanding, inner peace, and harmony that we needed so much. Despite the possible misunderstandings, differences in personality, and distance between us, we managed to learn how to support one another. Our conflicts taught us to be patient, to understand each other, and to talk about our problems. Love is not about perfection; it is about making a choice and trying to understand and communicate. Sometimes, you may think that I only do it out of obligations, but that is far from reality. Whatever actions I take towards you come straight from my heart. You deserve so much and it is my goal to make sure that you feel valued and cherished for whom you are. In a world full of "It is what it is," always remember that you are someone worth choosing and worth the risk.
+                </p>
+
+                <p className="text-base text-justify indent-8">
+                  Sometimes, distance can become a burden, but I know that there is no need to lose hope and faith.
                 </p>
 
                 <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
@@ -542,87 +441,36 @@ export function Home() {
                 </div>
 
                 <p className="text-base text-justify indent-8">
-                  And there are times when you ask yourself why nothing is happening yet, why your prayer of love, your prayer of opportunities, your prayer of breakthroughs has been postponed. However, as time passes by, you come to see that everything that was withheld was actually withheld for a reason. (Ecclesiastes 3:11)
+                  And even when I find myself wondering why certain things haven't happened yet, I trust that everything unfolds in its right time. What feels delayed is never denied, but carefully placed for a reason. <span className="italic">(Ecclesiastes 3:11)</span>
                 </p>
 
                 <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
                   <p className="italic text-purple-700 text-sm md:text-base">
-                    "May the Lord keep watch between you and me, when we are away from each other." <br/>
-                    <span className="text-xs">(Genesis 31:49)</span>
+                    "May the Lord keep watch between you and me, when we are away from each other."
                   </p>
+                  <p className="text-xs text-purple-600 mt-1">(Genesis 31:49)</p>
                 </div>
 
                 <p className="text-base text-justify indent-8">
-                  Distance is tough, not being able to see the person we love everyday, maintaining a relationship when apart from one another, or just being in a phase where we don't get to see each other much anymore. There would be instances when we want to be there for the other person because we want to provide protection and comfort. However, what this verse does is gently let us know that although we are unable to do so, God can do that for us and for our significant other. It tells us that the Lord sees both of us, takes care of both of our hearts, and closes the physical gap brought upon by distance. It's almost as if saying, "I may not be here at all times, but you're never without a protector and guide because He is with you wherever I can no longer be."
+                  Distance will never be an easy thing—missing out on being able to see and feel close to the one we love can be difficult. However, in this verse, it seems to me that even when I am unable to be at your side, God will forever be around both of our lives, protecting your heart, guiding your steps, and bridging the gap distance causes between us.
                 </p>
 
                 <p className="text-base text-justify indent-8">
-                  Just as written in 1 Peter 4:8, "Love each other deeply," true love should never be conditioned. True love never says, "If this occurs, I will love you." Rather, it is about picking someone regardless of the obstacles, problems, and complications. Being patient and accepting are some of the elements of true love. Keeps on showing up every single day irrespective of pain, misunderstandings, disappointments, or exhaustion.
+                  And just like in 1 Peter 4:8 where it says, "Love each other deeply," I think that true love is unconditional. It does not say, "I will love you if..." but rather decides to stick around despite misunderstandings, tiredness, and faults.
                 </p>
 
                 <p className="text-base text-justify indent-8">
-                  The amount of thoughts that have been going through my mind lately includes a lot of things, but one thought that has been constantly occupying my heart is my gratitude towards you. It is something that I may not tell you often, but you mean a lot to me and your presence in my life means a lot. There is so much about you that I love, from the simple things to the big things. You've made my life so warm and joyful that I feel very blessed that I've met you not by choice, instead by chance. You have given me so many reasons to keep going forward that I feel lucky just to have you around. All you have done for me reminds me a lot and surely to be cherished. Those times when we were alone, when we laughed out loud, and even sleeping on our cellphone. It all wasn't just for fun. It meant a lot to me, especially those instances where we revealed parts of ourselves to one another. They had a certain authenticity about them that I will never forget. And those phone calls, you made them so memorable for me. I could talk with you for hours, yet they seemed like only a minute went by because it was such an enjoyable experience. Being with you, even through a screen, was always something I looked forward to. Each time you come to my mind, I catch myself silently thanking God for you. You are one individual who can inject warmth, peace, and joy into the lives of people yet, you have managed to do that in mine. You are more than precious to me as you are a valuable gem. All your little quirks, the feelings you instill within me, and our wonderful memories will always be with me. It is not enough for me to just remember you. It is about being thankful to you. Each and every time. Thank you for your patience, compassion, understanding, and decision to show up in my life. Thank you for making me feel safe, for putting a smile on my face, and for simply brightening my life just by being around. I can't thank you enough for the blessing you've been in my life. To blew these things up, I'm extremely thankful that it is YOU 💛
+                  In all of the thoughts that I've had lately, there is one particular thought that stands out above the rest; that I'm grateful for you. Not only that I'm grateful for your presence in my life, your kind nature, and all of the memories that we've made together. From the lengthy talks that we've had and the short phone calls where they seemed like they went by too quickly because I was having so much fun. I'll never forget the way that you bring joy, warmth, and peace to my life, and all of the little things that make me feel that way. The way that you speak, the way that you care, and even the way that you know what I want without asking.
+                </p>
+
+                <p className="text-base text-justify indent-8">
+                  Thank you for your patience, your understanding, and even for the effort that you put in. Thank you for always being there and being someone that I can always be grateful for. Thank you for the way that you make me feel safe and happy. No matter what happens, it will always be you my Purple💜
                 </p>
 
                 <p className="text-center font-semibold text-lg text-pink-600 mt-6 pt-4 border-t-2 border-pink-200">
                   From My Heart With Love🌹💞
                 </p>
               </div>
-
-              {/* Second envelope appears after delay */}
-              {showReplyButton && !secondEnvelopeOpened && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ type: "spring", duration: 0.8 }}
-                  className="text-center mt-8"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleSecondEnvelopeClick}
-                    className="w-full bg-gradient-to-r from-purple-500 to-pink-600 text-white py-4 px-6 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow"
-                  >
-                    Reply
-                  </motion.button>
-                </motion.div>
-              )}
-
-              {/* Question revealed after reply button is clicked */}
-              {secondEnvelopeOpened && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ type: "spring", duration: 0.6 }}
-                  className="space-y-4 mt-8"
-                >
-                  <div className="bg-gradient-to-r from-pink-50 to-purple-50 p-6 rounded-2xl text-center border-2 border-pink-200">
-                    <p className="text-lg md:text-xl font-semibold text-gray-800">
-                      Would you mind unlocking the <span className="text-pink-600">"OFFICIAL PHASE?"</span>
-                    </p>
-                  </div>
-
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleYes}
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
-                  >
-                    <span>☐ YES</span>
-                    <span className="text-2xl">💚</span>
-                  </motion.button>
-
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleNo}
-                    className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
-                  >
-                    <span>☐ NO</span>
-                    <span className="text-2xl">💔</span>
-                  </motion.button>
-                </motion.div>
-              )}
 
               {/* Decorative bottom corners */}
               <div className="absolute bottom-4 left-4 text-pink-300 text-2xl">💕</div>
@@ -650,86 +498,40 @@ export function Home() {
             </motion.div>
           )}
 
-          {finalAnswer === "yes" && (
-            <motion.div
-              key="final-yes"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-lg w-full mx-4 text-center"
-            >
+          <AnimatePresence>
+            {showTulips && (
               <motion.div
-                animate={{
-                  scale: [1, 1.3, 1],
-                  rotate: [0, 10, -10, 0],
-                }}
-                transition={{
-                  duration: 0.5,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="inline-block mb-6"
+                key="tulip-bouquet"
+                initial={{ opacity: 0, scale: 0.5, y: 60 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.8, y: -40 }}
+                transition={{ type: "spring", duration: 0.7 }}
+                className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-pink-50/80 backdrop-blur-sm"
               >
-                <Heart size={100} className="text-green-500" fill="currentColor" />
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-center"
+                >
+                  <div className="text-[120px] leading-none select-none">💐</div>
+                  <div className="flex justify-center gap-2 mt-2 text-5xl">
+                    <motion.span animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2, repeat: Infinity }}>🌷</motion.span>
+                    <motion.span animate={{ rotate: [8, -8, 8] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>🌷</motion.span>
+                    <motion.span animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}>🌷</motion.span>
+                  </div>
+                  <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-6 text-2xl font-semibold text-pink-600"
+                  >
+                    For you 💜
+                  </motion.p>
+                </motion.div>
               </motion.div>
-              <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent mb-6">
-                Official Phase Unlocked! 💚
-              </h2>
-              <p className="text-xl text-gray-700 mb-4 leading-relaxed">
-                I am brimming with happiness at this moment! I am eagerly anticipating all the memories that we will make together. This means so much to me that I cannot express it in words, so thank you for your YES!
-              </p>
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                className="mt-6 text-6xl"
-              >
-                💛
-              </motion.div>
-            </motion.div>
-          )}
+            )}
+          </AnimatePresence>
 
-          {finalAnswer === "no" && (
-            <motion.div
-              key="final-no"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ type: "spring", duration: 0.6 }}
-              className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-lg w-full mx-4 text-center"
-            >
-              <motion.div
-                animate={{
-                  y: [0, -10, 0],
-                }}
-                transition={{
-                  duration: 1,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-                className="text-8xl mb-6"
-              >
-                💙
-              </motion.div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                I understand...
-              </h2>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                Your choice is one that I truly admire. I value your honesty, and I would never want you to feel compelled. But who knows, perhaps there's something else in store for us in the future. Until then, I will always cherish our connection.
-              </p>
-              <motion.div
-                className="mt-6 text-5xl"
-                animate={{
-                  rotate: [0, -5, 5, -5, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                }}
-              >
-                🤍
-              </motion.div>
-            </motion.div>
-          )}
 
           {answer === "denied" && (
             <motion.div

@@ -11,6 +11,7 @@ export function Home() {
   const [answer, setAnswer] = useState<"granted" | "denied" | null>(null);
   const [showBackButton, setShowBackButton] = useState(false);
   const [showTulips, setShowTulips] = useState(false);
+  const [letterEnvelopeOpened, setLetterEnvelopeOpened] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,7 +43,7 @@ export function Home() {
         spread: 55,
         origin: { x: 0 },
         colors: colors,
-        shapes: ["circle"],
+        shapes: ["square"],
         scalar: 2,
         gravity: 0.5,
         drift: 0.2,
@@ -53,7 +54,7 @@ export function Home() {
         spread: 55,
         origin: { x: 1 },
         colors: colors,
-        shapes: ["circle"],
+        shapes: ["square"],
         scalar: 2,
         gravity: 0.5,
         drift: -0.2,
@@ -64,16 +65,25 @@ export function Home() {
       }
     })();
 
-    // Balloon burst
+    // Square + emoji burst
     setTimeout(() => {
       confetti({
         particleCount: 40,
         spread: 100,
         origin: { y: 0.6 },
         colors: colors,
-        shapes: ["circle"],
+        shapes: ["square"],
         scalar: 2.5,
         gravity: 0.6,
+      });
+      confetti({
+        particleCount: 12,
+        spread: 120,
+        origin: { y: 0.5 },
+        shapes: [confetti.shapeFromText({ text: "🦋", scalar: 2 }), confetti.shapeFromText({ text: "🌸", scalar: 2 }), confetti.shapeFromText({ text: "🌺", scalar: 2 })],
+        scalar: 2,
+        gravity: 0.4,
+        flat: true,
       });
     }, 200);
 
@@ -84,6 +94,7 @@ export function Home() {
 
   const handleGranted = () => {
     setShowTulips(true);
+    setLetterEnvelopeOpened(false);
     setTimeout(() => {
       setShowTulips(false);
       setAnswer("granted");
@@ -103,7 +114,7 @@ export function Home() {
         spread: 55,
         origin: { x: 0 },
         colors: colors,
-        shapes: ["circle"],
+        shapes: ["square"],
         scalar: 2.2,
         gravity: 0.5,
         drift: 0.3,
@@ -114,7 +125,7 @@ export function Home() {
         spread: 55,
         origin: { x: 1 },
         colors: colors,
-        shapes: ["circle"],
+        shapes: ["square"],
         scalar: 2.2,
         gravity: 0.5,
         drift: -0.3,
@@ -138,12 +149,25 @@ export function Home() {
             y: Math.random() * 0.5 + 0.5,
           },
           colors: [color],
-          shapes: ["circle"],
+          shapes: ["square"],
           scalar: 3.5,
           gravity: 0.4,
         });
       }, i * 100);
     });
+
+    // Emoji burst
+    setTimeout(() => {
+      confetti({
+        particleCount: 16,
+        spread: 160,
+        origin: { y: 0.4 },
+        shapes: [confetti.shapeFromText({ text: "🦋", scalar: 2 }), confetti.shapeFromText({ text: "🌷", scalar: 2 }), confetti.shapeFromText({ text: "🌸", scalar: 2 })],
+        scalar: 2,
+        gravity: 0.35,
+        flat: true,
+      });
+    }, 500);
 
   };
 
@@ -187,6 +211,7 @@ export function Home() {
     setQuestionRevealed(false);
     setAnswer(null);
     setShowBackButton(false);
+    setLetterEnvelopeOpened(false);
   };
 
   if (!user) return null;
@@ -335,7 +360,51 @@ export function Home() {
             </motion.div>
           )}
 
-          {answer === "granted" && (
+          {answer === "granted" && !letterEnvelopeOpened && (
+            <motion.div
+              key="letter-envelope"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: "spring", duration: 0.6 }}
+              className="flex flex-col items-center"
+            >
+              <motion.button
+                whileHover={{ scale: 1.08, rotate: -2 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setLetterEnvelopeOpened(true)}
+                className="relative cursor-pointer focus:outline-none"
+              >
+                <div className="w-64 h-52 bg-gradient-to-br from-pink-300 to-rose-400 rounded-2xl shadow-2xl flex flex-col items-center justify-center relative overflow-hidden border-4 border-pink-200">
+                  {/* Envelope flap */}
+                  <div className="absolute top-0 left-0 w-full h-0 border-l-[128px] border-r-[128px] border-t-[72px] border-l-transparent border-r-transparent border-t-rose-500 z-10" />
+                  {/* Envelope body lines */}
+                  <div className="absolute bottom-0 left-0 w-full h-0 border-l-[128px] border-r-[128px] border-b-[56px] border-l-transparent border-r-transparent border-b-pink-400" />
+                  <div className="absolute top-0 left-0 w-1/2 h-full border-r-[1px] border-pink-200 opacity-30" style={{ borderRightStyle: "solid" }} />
+                  {/* Center content */}
+                  <div className="z-20 flex flex-col items-center gap-2">
+                    <motion.div
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                      className="text-4xl drop-shadow-lg"
+                    >
+                      💌
+                    </motion.div>
+                    <p className="text-white text-sm font-semibold drop-shadow text-center px-3 leading-snug" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                      Let my heart tell you something❤️
+                    </p>
+                  </div>
+                </div>
+                {/* Floating sparkles */}
+                <motion.span animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} className="absolute -top-3 -right-3 text-2xl">✨</motion.span>
+                <motion.span animate={{ y: [0, -6, 0], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.4 }} className="absolute -top-2 -left-4 text-xl">🌸</motion.span>
+              </motion.button>
+              <p className="mt-5 text-sm text-gray-600 text-center leading-relaxed">
+                Click Me! Click Me!<br />And claim your reward!
+              </p>
+            </motion.div>
+          )}
+
+          {answer === "granted" && letterEnvelopeOpened && (
             <motion.div
               key="granted"
               initial={{ scale: 0, opacity: 0 }}
@@ -406,21 +475,12 @@ export function Home() {
               
               <div className="pt-8 text-center mb-6">
                 <motion.div
-                  animate={{
-                    scale: [1, 1.2, 1],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
                   className="inline-block mb-4"
                 >
                   <Heart size={60} className="text-red-500" fill="currentColor" />
                 </motion.div>
-                <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-pink-500 to-red-600 bg-clip-text text-transparent mb-2">
-                  Let my heart tell you something🤗🫶
-                </h2>
               </div>
 
               <div className="px-4 md:px-8 mb-6 space-y-4 text-gray-700 leading-relaxed">
@@ -554,15 +614,12 @@ export function Home() {
               >
                 🥺
               </motion.div>
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                I am very sorry.....
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
+                Oops! System Error 404⚠️
               </h2>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                I know this will be difficult, and this is the last thing that I ever want to do. I appreciate the courage it took for you to be able to share this with me and I truly cannot thank you enough. You are an amazing individual, and it was not an easy decision to make.
-              </p>
-              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                In all honesty, my feelings have changed. I thank you for your compassion and for being so sincere when talking with me. I sincerely hope you find true happiness. 🤍
-              </p>
+              <p className="text-xl text-gray-600 mb-2 font-mono">Mission Failed.......</p>
+              <p className="text-lg text-gray-700 mb-4 font-mono">"Yes" not found.</p>
+              <p className="text-base text-gray-600 leading-relaxed">Proceeding with respect and gratitude.</p>
               <motion.div
                 className="mt-6 text-5xl"
                 animate={{

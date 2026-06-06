@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { Heart, LogOut, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import confetti from "canvas-confetti";
+import letterBg from "../../imports/letter.jpg";
 
 export function Home() {
   const [user, setUser] = useState<any>(null);
@@ -268,11 +269,23 @@ export function Home() {
               transition={{ type: "spring", duration: 0.8 }}
               className="text-center"
             >
+              <p className="mb-6 text-lg font-semibold text-gray-700">
+                Curious? Tap Me!
+              </p>
               <motion.button
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleEnvelopeClick}
                 className="relative group"
+                animate={{
+                  y: [0, -20, 0],
+                  rotate: [0, 3, 0, -3, 0]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
               >
                 <div className="bg-gradient-to-br from-pink-400 to-red-400 w-64 h-40 rounded-lg shadow-2xl flex items-center justify-center transform transition-transform">
                   <Mail size={80} className="text-white" />
@@ -285,9 +298,6 @@ export function Home() {
                   <Heart size={24} className="text-red-500" fill="currentColor" />
                 </motion.div>
               </motion.button>
-              <p className="mt-6 text-lg font-semibold text-gray-700">
-                Reveal the Secret with a click!
-              </p>
             </motion.div>
           )}
 
@@ -410,151 +420,140 @@ export function Home() {
               initial={{ scale: 0, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", duration: 0.6 }}
-              className="rounded-3xl shadow-2xl p-6 md:p-10 max-w-3xl w-full mx-4 relative overflow-hidden"
+              className="rounded-3xl shadow-2xl max-w-3xl w-full mx-4 relative overflow-hidden"
               style={{
-                backgroundImage: `
-                  radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 80%, rgba(221, 160, 221, 0.3) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 20%, rgba(255, 240, 245, 0.4) 0%, transparent 50%),
-                  repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 35px,
-                    rgba(255, 192, 203, 0.15) 35px,
-                    rgba(255, 192, 203, 0.15) 36px
-                  ),
-                  linear-gradient(135deg,
-                    #ffd6e8 0%,
-                    #ffe4f1 15%,
-                    #fff0f8 30%,
-                    #ffeef7 45%,
-                    #ffe8f5 60%,
-                    #ffd9ed 75%,
-                    #ffcce5 90%,
-                    #ffd6e8 100%
-                  )
-                `,
+                backgroundImage: `url(${letterBg})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
               }}
             >
-              {/* Letter Design */}
-              <div className="absolute top-0 left-0 w-full h-8 bg-gradient-to-r from-pink-300 via-purple-300 to-pink-300 rounded-t-3xl shadow-md"></div>
-              <div className="absolute top-8 left-0 w-full h-1 bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400"></div>
+              {/* Semi-transparent overlay for better text readability */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/75 via-pink-50/70 to-white/75 rounded-3xl"></div>
 
-              {/* Decorative corners and borders */}
-              <div className="absolute top-4 left-4 text-pink-300 text-2xl">🌸</div>
-              <div className="absolute top-4 right-4 text-pink-300 text-2xl">🌸</div>
+              {/* Content wrapper with relative positioning */}
+              <div className="relative z-10 p-6 md:p-10">
+                {/* Letter Design */}
+                <div className="absolute top-0 left-0 w-full h-8 bg-gradient-to-r from-pink-300 via-purple-300 to-pink-300 rounded-t-3xl shadow-md z-0"></div>
+                <div className="absolute top-8 left-0 w-full h-1 bg-gradient-to-r from-pink-400 via-purple-400 to-pink-400 z-0"></div>
 
-              {/* Corner decorations */}
-              <div className="absolute top-12 left-2 text-pink-200 text-xl">✨</div>
-              <div className="absolute top-12 right-2 text-pink-200 text-xl">✨</div>
-              <div className="absolute top-20 left-4 text-purple-200 text-sm">💝</div>
-              <div className="absolute top-20 right-4 text-purple-200 text-sm">💝</div>
+                {/* Decorative corners and borders */}
+                <div className="absolute top-4 left-4 text-pink-400 text-2xl drop-shadow-md">🌸</div>
+                <div className="absolute top-4 right-4 text-pink-400 text-2xl drop-shadow-md">🌸</div>
 
-              {/* Floating hearts decoration */}
-              <motion.div
-                animate={{ y: [0, -10, 0], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3, repeat: Infinity }}
-                className="absolute top-32 left-8 text-pink-200 text-2xl"
-              >
-                💕
-              </motion.div>
-              <motion.div
-                animate={{ y: [0, -15, 0], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                className="absolute top-48 right-6 text-purple-200 text-2xl"
-              >
-                💗
-              </motion.div>
-              <motion.div
-                animate={{ y: [0, -12, 0], opacity: [0.3, 0.6, 0.3] }}
-                transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
-                className="absolute top-64 left-6 text-pink-200 text-xl"
-              >
-                💖
-              </motion.div>
-              
-              <div className="pt-8 text-center mb-6">
+                {/* Corner decorations */}
+                <div className="absolute top-12 left-2 text-pink-300 text-xl drop-shadow-sm">✨</div>
+                <div className="absolute top-12 right-2 text-pink-300 text-xl drop-shadow-sm">✨</div>
+                <div className="absolute top-20 left-4 text-purple-300 text-sm drop-shadow-sm">💝</div>
+                <div className="absolute top-20 right-4 text-purple-300 text-sm drop-shadow-sm">💝</div>
+
+                {/* Floating hearts decoration */}
                 <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
-                  className="inline-block mb-4"
+                  animate={{ y: [0, -10, 0], opacity: [0.4, 0.7, 0.4] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="absolute top-32 left-8 text-pink-300 text-2xl drop-shadow-md"
                 >
-                  <Heart size={60} className="text-red-500" fill="currentColor" />
+                  💕
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, -15, 0], opacity: [0.4, 0.7, 0.4] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                  className="absolute top-48 right-6 text-purple-300 text-2xl drop-shadow-md"
+                >
+                  💗
+                </motion.div>
+                <motion.div
+                  animate={{ y: [0, -12, 0], opacity: [0.4, 0.7, 0.4] }}
+                  transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+                  className="absolute top-64 left-6 text-pink-300 text-xl drop-shadow-md"
+                >
+                  💖
+                </motion.div>
+
+                <div className="pt-8 text-center mb-6 relative">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse" }}
+                    className="inline-block mb-4"
+                  >
+                    <Heart size={60} className="text-red-500 drop-shadow-lg" fill="currentColor" />
+                  </motion.div>
+                </div>
+
+                {/* Text content with white background for readability */}
+                <div className="px-4 md:px-8 mb-6 space-y-4 bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-inner relative">
+                  <p className="font-semibold text-lg text-pink-700">Hello Bubby,</p>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    It all began with just a simple "Hi". Casual conversations turned into discussions that brought more and more comfort to both of us until eventually they became something that neither of us anticipated. Through simple conversations, we discovered mutual understanding, inner peace, and harmony that we needed so much. Despite the possible misunderstandings, differences in personality, and distance between us, we managed to learn how to support one another. Our conflicts taught us to be patient, to understand each other, and to talk about our problems. Love is not about perfection; it is about making a choice and trying to understand and communicate. Sometimes, you may think that I only do it out of obligations, but that is far from reality. Whatever actions I take towards you come straight from my heart. You deserve so much and it is my goal to make sure that you feel valued and cherished for whom you are. In a world full of "It is what it is," always remember that you are someone worth choosing and worth the risk.
+                  </p>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    Sometimes, distance can become a burden, but I know that there is no need to lose hope and faith.
+                  </p>
+
+                  <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50/90 rounded-r-lg shadow-sm">
+                    <p className="italic text-pink-700 text-sm md:text-base">
+                      "God knows the right time, the right place, the right person, and the right answer to your prayers."
+                    </p>
+                  </div>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    And even when I find myself wondering why certain things haven't happened yet, I trust that everything unfolds in its right time. What feels delayed is never denied, but carefully placed for a reason. <span className="italic">(Ecclesiastes 3:11)</span>
+                  </p>
+
+                  <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50/90 rounded-r-lg shadow-sm">
+                    <p className="italic text-purple-700 text-sm md:text-base">
+                      "May the Lord keep watch between you and me, when we are away from each other."
+                    </p>
+                    <p className="text-xs text-purple-600 mt-1">(Genesis 31:49)</p>
+                  </div>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    Distance will never be an easy thing—missing out on being able to see and feel close to the one we love can be difficult. However, in this verse, it seems to me that even when I am unable to be at your side, God will forever be around both of our lives, protecting your heart, guiding your steps, and bridging the gap distance causes between us.
+                  </p>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    And just like in 1 Peter 4:8 where it says, "Love each other deeply," I think that true love is unconditional. It does not say, "I will love you if..." but rather decides to stick around despite misunderstandings, tiredness, and faults.
+                  </p>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    In all of the thoughts that I've had lately, there is one particular thought that stands out above the rest; that I'm grateful for you. Not only that I'm grateful for your presence in my life, your kind nature, and all of the memories that we've made together. From the lengthy talks that we've had and the short phone calls where they seemed like they went by too quickly because I was having so much fun. I'll never forget the way that you bring joy, warmth, and peace to my life, and all of the little things that make me feel that way. The way that you speak, the way that you care, and even the way that you know what I want without asking.
+                  </p>
+
+                  <p className="text-base text-justify indent-8 text-gray-800 leading-relaxed">
+                    Thank you for your patience, your understanding, and even for the effort that you put in. Thank you for always being there and being someone that I can always be grateful for. Thank you for the way that you make me feel safe and happy. No matter what happens, it will always be you my Purple💜
+                  </p>
+
+                  <p className="text-center font-semibold text-lg text-pink-600 mt-6 pt-4 border-t-2 border-pink-300">
+                    From My Heart With Love🌹💞
+                  </p>
+                </div>
+
+                {/* Decorative bottom corners */}
+                <div className="absolute bottom-4 left-4 text-pink-400 text-2xl drop-shadow-md">💕</div>
+                <div className="absolute bottom-4 right-4 text-pink-400 text-2xl drop-shadow-md">💕</div>
+                <div className="absolute bottom-12 left-2 text-pink-300 text-xl drop-shadow-sm">🎀</div>
+                <div className="absolute bottom-12 right-2 text-pink-300 text-xl drop-shadow-sm">🎀</div>
+                <div className="absolute bottom-20 left-6 text-purple-300 text-sm drop-shadow-sm">🌺</div>
+                <div className="absolute bottom-20 right-6 text-purple-300 text-sm drop-shadow-sm">🌺</div>
+
+                {/* Decorative side elements */}
+                <motion.div
+                  animate={{ rotate: [0, 10, 0], opacity: [0.5, 0.8, 0.5] }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="absolute bottom-40 left-2 text-pink-300 text-lg drop-shadow-md"
+                >
+                  🦋
+                </motion.div>
+                <motion.div
+                  animate={{ rotate: [0, -10, 0], opacity: [0.5, 0.8, 0.5] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
+                  className="absolute bottom-56 right-2 text-purple-300 text-lg drop-shadow-md"
+                >
+                  🦋
                 </motion.div>
               </div>
-
-              <div className="px-4 md:px-8 mb-6 space-y-4 text-gray-700 leading-relaxed">
-                <p className="font-semibold text-lg text-pink-700">Hello Bubby,</p>
-
-                <p className="text-base text-justify indent-8">
-                  It all began with just a simple "Hi". Casual conversations turned into discussions that brought more and more comfort to both of us until eventually they became something that neither of us anticipated. Through simple conversations, we discovered mutual understanding, inner peace, and harmony that we needed so much. Despite the possible misunderstandings, differences in personality, and distance between us, we managed to learn how to support one another. Our conflicts taught us to be patient, to understand each other, and to talk about our problems. Love is not about perfection; it is about making a choice and trying to understand and communicate. Sometimes, you may think that I only do it out of obligations, but that is far from reality. Whatever actions I take towards you come straight from my heart. You deserve so much and it is my goal to make sure that you feel valued and cherished for whom you are. In a world full of "It is what it is," always remember that you are someone worth choosing and worth the risk.
-                </p>
-
-                <p className="text-base text-justify indent-8">
-                  Sometimes, distance can become a burden, but I know that there is no need to lose hope and faith.
-                </p>
-
-                <div className="border-l-4 border-pink-400 pl-4 py-2 bg-pink-50 rounded-r-lg">
-                  <p className="italic text-pink-700 text-sm md:text-base">
-                    "God knows the right time, the right place, the right person, and the right answer to your prayers."
-                  </p>
-                </div>
-
-                <p className="text-base text-justify indent-8">
-                  And even when I find myself wondering why certain things haven't happened yet, I trust that everything unfolds in its right time. What feels delayed is never denied, but carefully placed for a reason. <span className="italic">(Ecclesiastes 3:11)</span>
-                </p>
-
-                <div className="border-l-4 border-purple-400 pl-4 py-2 bg-purple-50 rounded-r-lg">
-                  <p className="italic text-purple-700 text-sm md:text-base">
-                    "May the Lord keep watch between you and me, when we are away from each other."
-                  </p>
-                  <p className="text-xs text-purple-600 mt-1">(Genesis 31:49)</p>
-                </div>
-
-                <p className="text-base text-justify indent-8">
-                  Distance will never be an easy thing—missing out on being able to see and feel close to the one we love can be difficult. However, in this verse, it seems to me that even when I am unable to be at your side, God will forever be around both of our lives, protecting your heart, guiding your steps, and bridging the gap distance causes between us.
-                </p>
-
-                <p className="text-base text-justify indent-8">
-                  And just like in 1 Peter 4:8 where it says, "Love each other deeply," I think that true love is unconditional. It does not say, "I will love you if..." but rather decides to stick around despite misunderstandings, tiredness, and faults.
-                </p>
-
-                <p className="text-base text-justify indent-8">
-                  In all of the thoughts that I've had lately, there is one particular thought that stands out above the rest; that I'm grateful for you. Not only that I'm grateful for your presence in my life, your kind nature, and all of the memories that we've made together. From the lengthy talks that we've had and the short phone calls where they seemed like they went by too quickly because I was having so much fun. I'll never forget the way that you bring joy, warmth, and peace to my life, and all of the little things that make me feel that way. The way that you speak, the way that you care, and even the way that you know what I want without asking.
-                </p>
-
-                <p className="text-base text-justify indent-8">
-                  Thank you for your patience, your understanding, and even for the effort that you put in. Thank you for always being there and being someone that I can always be grateful for. Thank you for the way that you make me feel safe and happy. No matter what happens, it will always be you my Purple💜
-                </p>
-
-                <p className="text-center font-semibold text-lg text-pink-600 mt-6 pt-4 border-t-2 border-pink-200">
-                  From My Heart With Love🌹💞
-                </p>
-              </div>
-
-              {/* Decorative bottom corners */}
-              <div className="absolute bottom-4 left-4 text-pink-300 text-2xl">💕</div>
-              <div className="absolute bottom-4 right-4 text-pink-300 text-2xl">💕</div>
-              <div className="absolute bottom-12 left-2 text-pink-200 text-xl">🎀</div>
-              <div className="absolute bottom-12 right-2 text-pink-200 text-xl">🎀</div>
-              <div className="absolute bottom-20 left-6 text-purple-200 text-sm">🌺</div>
-              <div className="absolute bottom-20 right-6 text-purple-200 text-sm">🌺</div>
-
-              {/* Decorative side elements */}
-              <motion.div
-                animate={{ rotate: [0, 10, 0], opacity: [0.4, 0.7, 0.4] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute bottom-40 left-2 text-pink-200 text-lg"
-              >
-                🦋
-              </motion.div>
-              <motion.div
-                animate={{ rotate: [0, -10, 0], opacity: [0.4, 0.7, 0.4] }}
-                transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                className="absolute bottom-56 right-2 text-purple-200 text-lg"
-              >
-                🦋
-              </motion.div>
             </motion.div>
           )}
 

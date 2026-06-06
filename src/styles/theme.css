@@ -122,6 +122,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
   }
 
   body {

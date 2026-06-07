@@ -13,7 +13,25 @@ export function Home() {
   const [showBackButton, setShowBackButton] = useState(false);
   const [showTulips, setShowTulips] = useState(false);
   const [letterEnvelopeOpened, setLetterEnvelopeOpened] = useState(false);
+  const [typewriterText, setTypewriterText] = useState("");
   const navigate = useNavigate();
+
+  const fullQuestion = 'Would you mind unlocking the "OFFICIAL PHASE?"';
+
+  useEffect(() => {
+    if (questionRevealed && !answer) {
+      let index = 0;
+      const interval = setInterval(() => {
+        if (index <= fullQuestion.length) {
+          setTypewriterText(fullQuestion.slice(0, index));
+          index++;
+        } else {
+          clearInterval(interval);
+        }
+      }, 80);
+      return () => clearInterval(interval);
+    }
+  }, [questionRevealed, answer]);
 
   useEffect(() => {
     const currentUser = localStorage.getItem("currentUser");
@@ -218,7 +236,7 @@ export function Home() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-200 via-purple-200 to-red-200 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-magenta-300 via-fuchsia-300 to-pink-300 p-4">
       {/* Header */}
       <div className="max-w-4xl mx-auto pt-6 pb-4 flex justify-between items-center">
         <motion.div
@@ -341,32 +359,42 @@ export function Home() {
                 >
                   <Heart size={80} className="text-red-500" fill="currentColor" />
                 </motion.div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">
-                  Would you mind unlocking the <span className="text-pink-600">"OFFICIAL PHASE?"</span>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 min-h-[80px] md:min-h-[90px]">
+                  {typewriterText}
+                  {typewriterText.length < fullQuestion.length && (
+                    <span className="animate-pulse">|</span>
+                  )}
                 </h2>
               </div>
 
-              <div className="space-y-4">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleGranted}
-                  className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
+              {typewriterText.length >= fullQuestion.length && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="space-y-4"
                 >
-                  <span>☐ YES</span>
-                  <span className="text-2xl">💚</span>
-                </motion.button>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleGranted}
+                    className="w-full bg-gradient-to-r from-pink-500 to-red-500 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
+                  >
+                    <span>☐ YES</span>
+                    <span className="text-2xl">💚</span>
+                  </motion.button>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={handleDenied}
-                  className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
-                >
-                  <span>☐ NO</span>
-                  <span className="text-2xl">💔</span>
-                </motion.button>
-              </div>
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={handleDenied}
+                    className="w-full bg-gray-300 text-gray-700 py-4 rounded-2xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow flex items-center justify-center gap-3"
+                  >
+                    <span>☐ NO</span>
+                    <span className="text-2xl">💔</span>
+                  </motion.button>
+                </motion.div>
+              )}
             </motion.div>
           )}
 
@@ -408,7 +436,7 @@ export function Home() {
                 <motion.span animate={{ y: [0, -8, 0], opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }} className="absolute -top-3 -right-3 text-2xl">✨</motion.span>
                 <motion.span animate={{ y: [0, -6, 0], opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.5, repeat: Infinity, delay: 0.4 }} className="absolute -top-2 -left-4 text-xl">🌸</motion.span>
               </motion.button>
-              <p className="mt-5 text-sm text-gray-600 text-center leading-relaxed">
+              <p className="mt-5 text-sm text-gray-800 text-center leading-relaxed font-bold">
                 Click Me! Click Me!<br />And claim your reward!
               </p>
             </motion.div>
@@ -565,24 +593,81 @@ export function Home() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8, y: -40 }}
                 transition={{ type: "spring", duration: 0.7 }}
-                className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-pink-50/80 backdrop-blur-sm"
+                className="fixed inset-0 flex flex-col items-center justify-center z-50 bg-gradient-to-br from-pink-100/90 via-rose-100/90 to-red-100/90 backdrop-blur-md"
               >
                 <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="text-center"
+                  animate={{ y: [0, -15, 0], rotate: [0, 2, 0, -2, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="text-center relative"
                 >
-                  <div className="text-[120px] leading-none select-none">💐</div>
-                  <div className="flex justify-center gap-2 mt-2 text-5xl">
-                    <motion.span animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2, repeat: Infinity }}>🌷</motion.span>
-                    <motion.span animate={{ rotate: [8, -8, 8] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>🌷</motion.span>
-                    <motion.span animate={{ rotate: [-8, 8, -8] }} transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}>🌷</motion.span>
+                  {/* Large central bouquet */}
+                  <div className="text-[200px] md:text-[280px] leading-none select-none filter drop-shadow-2xl">💐</div>
+
+                  {/* Surrounding tulips arranged in a bouquet shape */}
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <div className="relative w-full h-full">
+                      <motion.span
+                        className="absolute text-7xl md:text-9xl filter drop-shadow-lg"
+                        style={{ top: '-80px', left: '-100px' }}
+                        animate={{ rotate: [-12, -8, -12], y: [0, -8, 0] }}
+                        transition={{ duration: 2.2, repeat: Infinity }}
+                      >🌷</motion.span>
+                      <motion.span
+                        className="absolute text-7xl md:text-9xl filter drop-shadow-lg"
+                        style={{ top: '-90px', left: '0px' }}
+                        animate={{ rotate: [0, 3, 0], y: [0, -10, 0] }}
+                        transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                      >🌷</motion.span>
+                      <motion.span
+                        className="absolute text-7xl md:text-9xl filter drop-shadow-lg"
+                        style={{ top: '-80px', right: '-100px' }}
+                        animate={{ rotate: [12, 8, 12], y: [0, -8, 0] }}
+                        transition={{ duration: 2.2, repeat: Infinity, delay: 0.4 }}
+                      >🌷</motion.span>
+                      <motion.span
+                        className="absolute text-6xl md:text-8xl filter drop-shadow-lg"
+                        style={{ top: '-40px', left: '-140px' }}
+                        animate={{ rotate: [-18, -14, -18], y: [0, -6, 0] }}
+                        transition={{ duration: 2.4, repeat: Infinity, delay: 0.1 }}
+                      >🌷</motion.span>
+                      <motion.span
+                        className="absolute text-6xl md:text-8xl filter drop-shadow-lg"
+                        style={{ top: '-40px', right: '-140px' }}
+                        animate={{ rotate: [18, 14, 18], y: [0, -6, 0] }}
+                        transition={{ duration: 2.4, repeat: Infinity, delay: 0.3 }}
+                      >🌷</motion.span>
+                      <motion.span
+                        className="absolute text-5xl md:text-7xl filter drop-shadow-lg"
+                        style={{ top: '20px', left: '-120px' }}
+                        animate={{ rotate: [-15, -12, -15], y: [0, -5, 0] }}
+                        transition={{ duration: 2.6, repeat: Infinity, delay: 0.5 }}
+                      >🌹</motion.span>
+                      <motion.span
+                        className="absolute text-5xl md:text-7xl filter drop-shadow-lg"
+                        style={{ top: '20px', right: '-120px' }}
+                        animate={{ rotate: [15, 12, 15], y: [0, -5, 0] }}
+                        transition={{ duration: 2.6, repeat: Infinity, delay: 0.2 }}
+                      >🌹</motion.span>
+                    </div>
                   </div>
+
+                  {/* Additional scattered flowers */}
+                  <motion.div
+                    className="flex justify-center gap-4 mt-8 text-6xl md:text-8xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <motion.span animate={{ rotate: [-10, 10, -10], y: [0, -8, 0] }} transition={{ duration: 2.2, repeat: Infinity }}>🌺</motion.span>
+                    <motion.span animate={{ rotate: [10, -10, 10], y: [0, -10, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}>🌸</motion.span>
+                    <motion.span animate={{ rotate: [-10, 10, -10], y: [0, -8, 0] }} transition={{ duration: 2.2, repeat: Infinity, delay: 0.6 }}>🌺</motion.span>
+                  </motion.div>
+
                   <motion.p
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-6 text-2xl font-semibold text-pink-600"
+                    transition={{ delay: 0.6 }}
+                    className="mt-12 text-3xl md:text-4xl font-bold text-pink-600 drop-shadow-lg"
                   >
                     For you 💜
                   </motion.p>
